@@ -1,0 +1,73 @@
+<section id="contact" class="mx-auto text-center">
+	<!-- title -->
+	<div>
+		<h2>No.{{newComment.topic_id}}</h2>
+	</div>
+
+	<!-- form -->
+	<div class="container">
+		<form name="saveComment" ng-submit="save()" novalidation>
+			<div class="row mb-3 mx-auto text-center form-group" style="width: 400px;">
+				<input type="text" name="name" id="name" ng-model="newComment.name"
+					class="form-control" autofocus placeholder="名前を入力" maxlength=40
+					required> <span ng-show="saveComment.name.$error.required"></span>
+			</div>
+
+			<div class="row mtb-2 mx-auto text-center form-group"
+				style="width: 400px;">
+				<textarea name="message" id="message" ng-model="newComment.message"
+					rows="3" class="form-control mx-auto mb-3" maxlength=40
+					placeholder="コメントを入力" required></textarea>
+				<span ng-show="saveComment.message.$error.required"></span>
+			</div>
+
+			<div class="mtb-5 d-grid gap-2 col-6 mx-auto">
+				<input type="hidden" name="topic_id" ng-model="newComment.topic_id">
+				<input type="submit" id="CommentBtn"
+					class="btn btn-primary mx-auto mb-3" style="width: 150px"
+					ng-disabled="saveComment.$invalid" value="投稿">
+			</div>
+		</form>
+	</div>
+
+</section>
+
+<!-- comment -->
+<div class="container">
+	<div class="card mt-5">
+		<div class="card-body">
+			<nav class="navbar navbar-expand-lg">
+				<div class="container-fluid">
+					<h1 class="display-4">コメント欄</h1>
+					<div class="collapse navbar-collapse" id="navbarForm">
+						<a href="." class="d-flex ms-auto flex-shrink-0">[戻る]</a>
+					</div>
+				</div>
+			</nav>
+			<div class="d-flex justify-content-center">
+				<table id="table" class="table table-hover">
+					<thead>
+						<tr class="table-light">
+							<th scope="col">#</th>
+							<th scope="col">name</th>
+							<th scope="col">comment</th>
+							<th scope="col">time</th>
+							<th scope="col">delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="comment in commentlist">
+							<td>{{comment.comment_id}}</td>
+							<td>{{comment.name}}</td>
+							<td>{{comment.message}}</td>
+							<td>{{comment.date | date : "yyyy年MM月dd日 HH:mm:ss"}}</td>
+							<td><a ng-href="#/comment/{{comment.topic_id}}"
+								ng-click="remove(comment.comment_id)">[削除]</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+</div>

@@ -1,0 +1,67 @@
+<h1>
+	<a href="#">Forum</a>
+</h1>
+
+<form name="saveForm" ng-submit="save()" novalidate>
+	<div class="formTopic">
+		<div class="mx-auto mb-3" style="width: 200px">
+			<input type="text" name="title" class="form-control" id="title"
+				ng-model="newObj.title" autofocus placeholder="タイトルを入力"
+				maxlength="40" required /> <span
+				ng-show="saveForm.title.$error.required"></span>
+		</div>
+		<div class="d-grid gap-2 col-6 mx-auto">
+			<input type="submit" id="TopicBtn" ng-disabled="saveForm.$invalid"
+				class="btn btn-primary mx-auto mb-3" style="width: 150px"
+				value="新規作成" />
+		</div>
+	</div>
+</form>
+
+<div class="container">
+	<div class="card mt-5">
+		<div class="card-body">
+			<nav class="navbar navbar-light bg-light">
+				<div class="container-fluid">
+					<!-- ID検索 -->
+					<div class="d-flex">
+						<input type="text" name="topicid" ng-model="topicid" class="form-control me-2" placeholder="トピックIDを入力" />
+						<button ng-click="searchBtn()" class="btn btn-outline-success">検索</button>
+					</div>
+
+					<div class="d-flex" id="navbarForm">
+						<a href="." class="d-flex ms-auto flex-shrink-0">[全件表示]</a>
+					</div>
+				</div>
+			</nav>
+
+			<div class="d-flex justify-content-center">
+				<table id="table" class="table table-hover">
+					<thead>
+						<tr class="table-light">
+							<th scope="col">#</th>
+							<th scope="col">title</th>
+						</tr>
+					</thead>
+
+					<tbody ng-show="show">
+						<tr>
+							<td>{{target.id}}</td>
+							<td><a ng-href="#/comment/{{target.id}}">{{target.title}}</a></td>
+						</tr>
+					</tbody>
+					<tbody ng-hide="listshow">
+						<tr ng-repeat="topic in list">
+							<td>{{topic.id}}</td>
+							<td><a ng-href="#/comment/{{topic.id}}">{{topic.title}}</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+
